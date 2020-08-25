@@ -1,0 +1,12 @@
+.planet-info {
+    margin-left: 15px;
+}
+
+.term {
+    margin-right: 5px;
+}
+
+.random-planet {
+    display: flex;
+    justify-content: center;
+}
