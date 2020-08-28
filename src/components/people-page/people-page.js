@@ -3,9 +3,14 @@ import React, { Component } from 'react';
 import './people-page.css';
 
 import ItemList from '../item-list';
-import PersonDetails from '../person-details';
+import ItemDetails from '../item-details';
+import SwapiService from '../../service/swapiservice';
+import ErrorBoundary from '../error-boundary';
+import Row from '../row';
 
 export default class PeoplePage extends Component {
+
+    swapiService = new SwapiService();
 
     state = {
         selectedPerson: 3
@@ -16,17 +21,24 @@ export default class PeoplePage extends Component {
     };
 
     render() {
-        return (
-            <div className="row mb2">
-                <div className="col-md-6">
+
+        const itemList = ( 
                     <ItemList 
                     onItemSelected={this.onPersonSelected}
-                    getData={this.swapiService.getAllPlanets}/>
-                </div>
-                <div className="col-md-6">
-                    <PersonDetails personId={this.state.selectedPerson}/>
-                </div>
-            </div>
-        )   
-    }
+                    getData={this.swapiService.getAllPeople}>
+                    { (i) => (
+                        `${i.name} (${i.gender}, ${i.birthYear})`
+                        )}
+                    </ItemList>
+                    );
+
+        return (
+        <ErrorBoundary>
+            <Row left={itemList}
+            right={<ItemDetails personId={this.state.selectedPerson}/>}>
+            </Row>
+        </ErrorBoundary>    
+                 
+        );   
+    };
 }

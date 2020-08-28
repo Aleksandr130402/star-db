@@ -8,13 +8,12 @@ swapiService = new SwapiService();
     
     state = {
         itemList: null
-    }
+    };
 
     componentDidMount() {
 
         const { getData } = this.props;
         getData()
-        .getAllPeople()
         .then((itemList) => {
             this.setState({
                 itemList
@@ -23,12 +22,15 @@ swapiService = new SwapiService();
     }
 
     renderItems(arr) {
-        return arr.map(({id, name}) => {
+        return arr.map((item) => {
+            const {id} = item;
+
+            const label = this.props.children(item);
             return (
                 <li className="list-group-item" 
                 key={id}
                 onClick={() => this.props.onItemSelected(id)}>
-                {name}
+                {label}
                 </li>
             );  
         });
@@ -36,19 +38,18 @@ swapiService = new SwapiService();
 
     render() {
 
-        const { peopleList } = this.state;
-
+        const { itemList } = this.state;
        
 
-        if (!peopleList) {
+        if (!itemList) {
             return <Spinner/>;
         }
 
-        const characters = this.renderItems(peopleList);
+        const items = this.renderItems(itemList);
 
         return (
             <ul className="item-list list-group">
-                {characters}
+                {items}
             </ul>
         );
     }
