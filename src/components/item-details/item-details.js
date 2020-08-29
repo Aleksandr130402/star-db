@@ -60,8 +60,7 @@ export default class ItemDetails extends Component {
             return <span> Select a item from list </span>;
         }
 
-        const { name, gender,
-            birthYear, eyeColor} = item;
+        const { name } = item;
 
        return (
         <div className="item-details card">
@@ -73,9 +72,9 @@ export default class ItemDetails extends Component {
                 <h4>{name}</h4>
                 <ul className="list-group-item">
                     {
-                        React.Children.map((child, idx) => {
-                            return React.cloneElement(child, {item});
-                        })
+                    React.Children.map((child) => {
+                        return React.cloneElement(child, {item});
+                    })
                     }
 
                 </ul>
