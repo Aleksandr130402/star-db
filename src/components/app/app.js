@@ -10,15 +10,11 @@ import ErrorBoundary from '../error-boundary';
 import Row from '../row';
 
 import { SwapiServiceProvider } from '../swapi-service-context';
-
 import {
-    PersonDetails,
-    PlanetDetails,
-    StarshipDetails,
-    PersonList,
-    PlanetList,
-    StarshipList
-} from '../ws-components';
+    PeoplePage,
+    PlanetPage,
+    StarshipsPage
+} from '../pages';
 
 export default class App extends Component {
 
@@ -60,17 +56,11 @@ export default class App extends Component {
                     <Header/>
                     {planet}
 
-                    <Row left={<PersonList/>} 
-                    right={<PersonDetails itemId={3}/>}
-                    />
+                   <PeoplePage/>
 
-                    <Row left={<PlanetList/>} 
-                    right={<PlanetDetails itemId={2}/>}
-                    />
+                   <PlanetPage/>
 
-                    <Row left={<StarshipList/>}
-                    right={<StarshipDetails itemId={9}/>}
-                    />
+                   <StarshipsPage/>
       
                 </div>
                 </SwapiServiceProvider>
